@@ -7,11 +7,12 @@ class Pirata{
 	}
 }
 
-class Guerrero inherits MonstruoHumanoide{
+class Guerrero inherits Pirata{
+	var property poderDePelea
 	var property vitalidad
 	
 	override method poderDeMando(){
-		return super() * vitalidad
+		return poderDePelea * vitalidad
 	}
 	
 	override method serHerido(){
