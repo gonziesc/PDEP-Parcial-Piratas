@@ -5,6 +5,14 @@ class Pirata{
 	method tomarRonCon(unPirata) {
 		energia -= 50
 	}
+
+	method esFuerte() {
+		return self.poderDeMando() > 100
+	}
+
+	method estaCansado() {
+		return energia < 20
+	}
 }
 
 class Guerrero inherits Pirata{
