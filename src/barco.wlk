@@ -4,6 +4,7 @@ class Barco{
 	var property poderDeFuego
 	var property municiones
 	var property bando
+	
 	method capitan(){
 		return tripulacion.max({tripulante => tripulante.poderDeMando()})
 	}
@@ -60,7 +61,7 @@ class Barco{
 	method perderTripulantesCansados(){
 		tripulacion = tripulacion.filter({tripulante => !tripulante.estaCansado()})
 	}
-	
+
 	method aplicarBonus(){
 		bando.aplicarBonus(self)
 	}

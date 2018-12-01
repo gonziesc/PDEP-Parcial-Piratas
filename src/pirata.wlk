@@ -1,7 +1,9 @@
 class Pirata{
 	var property energia
+	
 	method poderDeMando()
 	method serHerido()
+	
 	method tomarRonCon(unPirata) {
 		energia -= 50
 	}
@@ -32,7 +34,7 @@ class Navegador inherits Pirata{
 	var property inteligencia
 	
 	override method poderDeMando(){
-		return inteligencia **2
+		return inteligencia ** 2
 	}
 	
 	override method serHerido(){
@@ -64,16 +66,20 @@ object jackSparrow inherits Pirata {
 	var property poderDePelea = 200
 	var property inteligencia = 300
 	var property ingredientes = ["botellaDeRon"]
+	
 	override method poderDeMando(){
 		return poderDePelea * inteligencia * energia
 	}
+	
 	override method tomarRonCon(unPirata){
 		energia += 100
 		unPirata.tomarRonCon(self)
 	}
+	
 	method recibirIngrediente(ingrediente) {
 		ingredientes.add(ingrediente)
 	}
+	
 	override method serHerido(){
 		inteligencia /= 2
 		poderDePelea /= 2
@@ -82,12 +88,12 @@ object jackSparrow inherits Pirata {
 
 class MonstruoHumanoide inherits Pirata{
 	var property poderDePelea
-		override method poderDeMando(){
+	
+	override method poderDeMando(){
 		return poderDePelea
 	}
 	
 	override method serHerido(){
 		poderDePelea /= 2
 	}
-	
 }
