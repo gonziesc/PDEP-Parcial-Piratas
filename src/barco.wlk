@@ -4,6 +4,7 @@ class Barco{
 	var property poderDeFuego
 	var property municiones
 	var property bando
+	
 	method capitan(){
 		return tripulacion.max({tripulante => tripulante.poderDeMando()})
 	}
@@ -22,6 +23,7 @@ class Barco{
 	}
 	
 	method perderContra(otroBarco){
+		tripulantes.foreach({tripulante => tripulante.serHerido()})
 		otroBarco.ganarTripulacion(self.tripulacionFuerte())
 		self.dejarDesolado()
 	}
@@ -34,11 +36,10 @@ class Barco{
 	}
 	
 	method tripulacionFuerte(){
-		return tripulacion.filter({tripulante => tripulante.poderDeMando() > 100})
+		return tripulacion.filter({tripulante => tripulante.esFuerte()})
 	}
 	
 	method ganarTripulacion(tripulantes){
-		tripulantes.foreach({tripulante => tripulante.serHerido()})
 		tripulacion.addAll(tripulantes)
 	}
 	
@@ -54,15 +55,19 @@ class Barco{
 	
 	method recibirDisparos(cantidad){
 		resistencia -= cantidad * 50
-		tripulacion = tripulacion.filter({tripulante => tripulante.energia() > 20})
+		self.perderTripulantesCansados()
 	}
-	
+
+	method perderTripulantesCansados(){
+		tripulacion = tripulacion.filter({tripulante => !tripulante.estaCansado()})
+	}
+
 	method aplicarBonus(){
 		bando.aplicarBonus(self)
 	}
 	
-	method aumentarMuniciones(cantidad){
-		municiones += cantidad
+	method aumentarMunicionesEnPorcentaje(porcentaje){
+		municiones += municiones * porcentaje
 	}
 	
 	method aumentarPoderDeFuego(cantidad){
@@ -77,7 +82,7 @@ class Barco{
 
 object armadaInglesa{
 	method aplicarBonus(barco){
-		barco.aumentarMuniciones(barco.municiones() * 0,3)
+		barco.aumentarMunicionesEnPorcentaje(0,3)
 	}
 }
 
