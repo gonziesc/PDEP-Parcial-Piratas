@@ -22,6 +22,7 @@ class Barco{
 	}
 	
 	method perderContra(otroBarco){
+		tripulantes.foreach({tripulante => tripulante.serHerido()})
 		otroBarco.ganarTripulacion(self.tripulacionFuerte())
 		self.dejarDesolado()
 	}
@@ -38,7 +39,6 @@ class Barco{
 	}
 	
 	method ganarTripulacion(tripulantes){
-		tripulantes.foreach({tripulante => tripulante.serHerido()})
 		tripulacion.addAll(tripulantes)
 	}
 	
